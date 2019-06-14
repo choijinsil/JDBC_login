@@ -27,6 +27,18 @@ public class MembershipVO {
 		this.addr = addr;
 		this.job = job;
 	}
+	
+	public MembershipVO(String id, String name, int ssn1, int ssn2, String phone, String addr,
+			String job) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.ssn1 = ssn1;
+		this.ssn2 = ssn2;
+		this.phone = phone;
+		this.addr = addr;
+		this.job = job;
+	}
 
 	public String getId() {
 		return id;

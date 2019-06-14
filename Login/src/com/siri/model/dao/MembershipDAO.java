@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Properties;
 
 import com.siri.model.vo.MembershipVO;
@@ -27,6 +29,211 @@ public class MembershipDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	// 이름 패턴 회원 정보조회
+	public ArrayList<MembershipVO> findSearch(Map<String, String> map) {
+
+		String title = map.get("title");
+		String key = map.get("key");
+		ArrayList<MembershipVO> list = new ArrayList<MembershipVO>();
+		String sql = "select id, name, ssn1, ssn2, phone, addr, job from membership where name like ? ";
+		System.out.println("타이틀>>" + title + "키>>" + key);
+		connect();
+		try {
+			if ("아이디".equals(title)) {
+				sql = "select id, name, ssn1, ssn2, phone, addr, job from membership where id like ? ";
+			} else if ("이름".equals(title)) {
+				sql = "select id, name, ssn1, ssn2, phone, addr, job from membership where name like ? ";
+			} else {
+				sql = "select id, name, ssn1, ssn2, phone, addr, job from membership where addr like ? ";
+			}
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + key + "%"); // %는 스트링(sql문법이 아니다.)
+			System.out.println(sql);
+			rs = pstmt.executeQuery(); // 이미 위에서 sql을 실행했기 때문에 빈괄호로 실행
+
+			while (rs.next()) {
+				MembershipVO vo = new MembershipVO(rs.getString("id"), rs.getString("name"), rs.getInt("ssn1"),
+						rs.getInt("ssn2"), rs.getString("phone"), rs.getString("addr"), rs.getString("job"));
+				list.add(vo);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return list;
+	}
+
+	// admin확인
+	public String findAdmin(String id, String pass) {
+		String isAdmin = "";
+		connect();
+		try {
+
+			String sql = "select id from membership where id = ? and pass=? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id); // sql 구문으로 변경될 염려가 없다!
+			pstmt.setString(2, pass);
+			rs = pstmt.executeQuery(); // 이미 위에서 sql을 실행했기 때문에 빈괄호로 실행
+			if (rs.next()) { // 아이디가 존재한다면
+
+				isAdmin = rs.getString("id");
+				return isAdmin;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return isAdmin;
+	}
+
+	public int findExistId(String id) {
+		// 아이디 중복체크
+		connect();
+		// MembershipVO vo = null;
+		try {
+
+			String sql = "select count(*) from membership where id = ? ";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) { // 생략가능하다 count는 무조건 1행이 나올것이기 때문에 하지만 if문을 사용하는게 좋음
+//				vo = new MembershipVO(rs.getString("id"), rs.getString("pass"), rs.getString("name"), rs.getInt("ssn1"),
+//						rs.getInt("ssn2"), rs.getString("phone"), rs.getString("addr"), rs.getString("job"));
+				return rs.getInt(1); // 선택된 회원정보 리턴!
+				// 만약 count(*) 에 cnt라는 별칭을 줬다면 return rs.getInt("cnt")로 받아야 한다.
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return 0;
+
+	}
+
+	public boolean remove(String id) {
+		connect();
+		try {
+			String sql = "delete from membership where id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+
+			int t = pstmt.executeUpdate();
+			if (t == 1)
+				return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return false;
+	}
+
+	public ArrayList<MembershipVO> findByName(String name) {
+
+		ArrayList<MembershipVO> list = new ArrayList<MembershipVO>();
+		connect();
+		try {
+
+			String sql = "select id, name, ssn1, ssn2, phone, addr, job from membership where name like ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + name + "%"); // %는 스트링(sql문법이 아니다.)
+			System.out.println(sql);
+			rs = pstmt.executeQuery(); // 이미 위에서 sql을 실행했기 때문에 빈괄호로 실행
+
+			while (rs.next()) {
+				MembershipVO vo = new MembershipVO(rs.getString("id"), rs.getString("name"), rs.getInt("ssn1"),
+						rs.getInt("ssn2"), rs.getString("phone"), rs.getString("addr"), rs.getString("job"));
+				list.add(vo);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return list;
+	}
+
+	public boolean modify(MembershipVO vo) {
+		connect();
+		try {
+			String sql = "update membership set pass=?, phone=?, addr=?, job=? where id=? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getPass());
+			pstmt.setString(2, vo.getPhone());
+			pstmt.setString(3, vo.getAddr());
+			pstmt.setString(4, vo.getJob());
+			pstmt.setString(5, vo.getId());
+
+			int t = pstmt.executeUpdate();
+			if (t == 1)
+				return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return false;
+
+	}
+
+	public MembershipVO findById(String id) {
+		connect();
+		MembershipVO vo = null;
+		try {
+
+			String sql = "select * from membership where id = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				vo = new MembershipVO(rs.getString("id"), rs.getString("pass"), rs.getString("name"), rs.getInt("ssn1"),
+						rs.getInt("ssn2"), rs.getString("phone"), rs.getString("addr"), rs.getString("job"));
+				return vo; // 선택된 회원정보 리턴!
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return vo;
+	}
+
+	public ArrayList<MembershipVO> findAll() {
+		ArrayList<MembershipVO> list = new ArrayList<MembershipVO>();
+		connect();
+		try {
+
+			String sql = "select id, name, ssn1, ssn2, phone, addr, job from membership where id<>'admin'";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery(); // 이미 위에서 sql을 실행했기 때문에 빈괄호로 실행
+
+			while (rs.next()) {
+				MembershipVO vo = new MembershipVO(rs.getString("id"), rs.getString("name"), rs.getInt("ssn1"),
+						rs.getInt("ssn2"), rs.getString("phone"), rs.getString("addr"), rs.getString("job"));
+				list.add(vo);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return list;
 	}
 
 	public boolean findLogin(String id, String pass) {
@@ -92,7 +299,7 @@ public class MembershipDAO {
 			System.out.println("로그인 SQL>>>" + sql);
 			rs = stmt.executeQuery(sql);// (조회)sql문 실행요청
 			if (rs.next()) {
-				// rs.getInt("count(*)") ==> (X) 에러 (함수명을 컬럼명으로 사용하지 못함)
+				// rs.getInt("count(*)") ==> 함수명으로 사용가능
 				// rs.getInt("cnt") ==> (O)
 				int cnt = rs.getInt(1);
 				if (cnt > 0)

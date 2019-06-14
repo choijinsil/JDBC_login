@@ -3,6 +3,8 @@ package com.siri.view;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Panel;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -12,14 +14,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.siri.model.dao.MembershipDAO;
+
 public class JoinForm extends JFrame {
 	JLabel la_id, la_pass, la_pass2, la_name, la_ssn, la_phone, la_addr, la_job;
 
-	public JTextField tf_id, tf_pass, tf_pass2, tf_name, tf_addr, tf_phone1, tf_phone2, tf_phone3, tf_ssn1;
-	public JPasswordField tf_ssn2; // 구분되어지는 번호
+	public JTextField tf_id, tf_name, tf_addr, tf_phone1, tf_phone2, tf_phone3, tf_ssn1;
+	public JPasswordField tf_pass, tf_pass2, tf_ssn2; // 구분되어지는 번호
 	public JComboBox<String> cb_job;
 
 	public JButton bt_submit, bt_reset, bt_checkid;
+	//public String ck_str;
+	//public boolean isOk;
 	Panel p1;
 	Panel p2;
 	Panel p3;
@@ -88,8 +94,8 @@ public class JoinForm extends JFrame {
 		setLayout(new FlowLayout(FlowLayout.LEFT));
 
 		tf_id = new JTextField(10);
-		tf_pass = new JTextField(10);
-		tf_pass2 = new JTextField(10);
+		tf_pass = new JPasswordField(10);
+		tf_pass2 = new JPasswordField(10);
 		tf_name = new JTextField(10);
 		tf_ssn1 = new JTextField(5);
 		tf_ssn2 = new JPasswordField(5);
@@ -111,6 +117,9 @@ public class JoinForm extends JFrame {
 		la_addr = new JLabel("주        소: ");
 		la_job = new JLabel("직        업: ");
 
+//		ck_str = new String();
+		//isOk = true;
+
 		p1 = new Panel();
 		p2 = new Panel();
 		p3 = new Panel();
@@ -120,7 +129,47 @@ public class JoinForm extends JFrame {
 		p7 = new Panel();
 		p8 = new Panel();
 		p9 = new Panel();
+		
+//		tf_id.addKeyListener(new KeyListener() {
+//
+//			@Override
+//			public void keyTyped(KeyEvent e) {
+//				// TODO Auto-generated method stub
+//
+//			}
+//
+//			@Override
+//			public void keyReleased(KeyEvent e) {
+//				//isOk = false;
+//
+//			}
+//
+//			@Override
+//			public void keyPressed(KeyEvent e) {
+//				// System.out.println(e.getKeyChar());
+//				// char를 문자로 변경 한문자씩 찍힌다.
+//				ck_str = Character.toString(e.getKeyChar());
+//
+//				System.out.print(ck_str);
+//
+//			}
+//		});
 
+	}
+	
+	public void initText() {
+		tf_addr.setText("");
+		tf_id.setText("");
+		tf_name.setText("");
+		tf_pass.setText("");
+		tf_pass2.setText("");
+		tf_phone1.setText("");
+		tf_phone2.setText("");
+		tf_phone3.setText("");
+		tf_ssn1.setText("");
+		tf_ssn2.setText("");
+		
+		
 	}
 
 	public void showMsg(String msg) {

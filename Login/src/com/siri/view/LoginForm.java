@@ -58,7 +58,13 @@ public class LoginForm extends JFrame {
 
 		setSize(300, 200);
 		setVisible(true);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+	}
+
+	public void initText() {
+		tf_id.setText("");
+		tf_pass.setText("");
 	}
 
 	public void showMsg(String msg) {
