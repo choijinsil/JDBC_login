@@ -1,0 +1,290 @@
+
+
+
+<로그인과 회원가입>
+
+1. View (com.encore.j0612.view)
+   - LoginForm(로그인폼)
+       
+     tf_id     ---> JTextField
+     tf_pass   ---> 비밀번호(보이지않게) JPasswordField
+     bt_login
+     bt_join
+   
+   - JoinForm(회원가입폼)
+     tf_id
+     tf_pass
+     tf_pass2
+     tf_name
+     tf_ssn1
+     tf_ssn2   ----> JPasswordField
+     tf_phone1
+     tf_phone2
+     tf_phone3
+     tf_addr
+     
+     cb_job
+     
+     bt_submit   등록버튼
+     bt_reset    취소버튼
+     bt_checkid  중복확인버튼
+   
+   - UpdateForm(회원정보수정폼)  ==> JoinForm복사
+      : 타이틀 ---> 회원정보수정
+      : id, 이름, 주민번호의 편집 불능
+      : 중복확인 버튼 제거
+   
+   - ServiceForm(서비스창)  ==> 로그인 성공시 보여지는 서비스폼
+      : id, 이름, 나이, 성별, 전화번호, 주소, 직업 출력
+      : 버튼 (보기,수정,삭제,검색) 
+         ---> 버튼 (전체보기,수정,삭제,이름검색,종료)
+      : JTable table, DefaultTableModel dtm
+      : bt_sel_all, bt_up,  bt_del,
+        bt_sel_name, bt_exit   
+   
+2. Model (com.encore.j0612.model.vo,  com.encored.j0612.model.dao)
+    
+    - MembershipVO   : DB(테이블)에 있는 (한 개의)레코드를 표현하는 객체!!
+    - MembershipDAO  (추가,삭제,수정,조회)
+                 ---> create, remove, modify, find, findAll
+ 
+3. Controller (com.encore.j0612.control)
+    - Controller
+        
+=======================================================================
+<작업순서>
+--------------------------------------------------------------
+[simple test]
+1. 로그인 폼 만들기
+2. 컨트롤러 만들기
+3. 컨트롤러에 로그인폼 등록
+4. DAO안에 findLogin(String id, String pass) 정의
+5. 샘플 회원 등록
+6. 로그인 폼- 로그인 버튼 클릭
+    ---> '로그인 성공'  또는  '로그인 실패' 메시지 출력. 
+
+--------------------------------------------------------------
+1. 시작뷰는 로그인폼!!
+  - Controller에  (4개)뷰 등록
+  - LoginForm만 setVisible(true)!!
+  
+2. 회원가입
+  - LoginForm의 '신규가입'버튼 클릭으로 JoinForm이동
+  - JoinForm 입력값 얻기
+  - 입력값을 MembershipVO으로 묶어주기
+  - MembershipDAO : create()호출
+                       ---> DB입력
+  - 입력성공 또는 실패 메시지 후 성공시 LoginForm으로 이동.
+[회원가입폼의 직업샘플]
+"학생","공무원","언론/출판","군인/경찰","일반사무직",
+"영업직","기술/전문직","보건/의료","자영업","주부","기타"                           
+  
+  
+2. 회원가입 
+   ==> DB에 입력!!  ---> insert 
+   ==> 필요한 요소?  
+  - 회원정보 입력할 UI (view)         - DB테이블과 연결된 객체             - 회원정보를 저장할 DB테이블
+       InputForm                      PersonDAO                     person
+       JoinForm                       MembershipDAO                 membership
+                                   ==> DB전담클래스(sql실행)         ==>컬럼수? 8개    
+       
+                                      1           2
+       getText() 10번!!              void create(8개변수 혹은 1개의 변수){
+                                                          ---------
+                                                           VO객체
+       ---> 변수갯수? 10개!!                  3
+       --->컬럼의 갯수는 8개인데?        String sql="insert문 values (데이터!!)";
+       --->이유)                              sql에 대한 실행요청!!
+         DB컬럼 : phone                }
+         UI변수: phone1,phone2,phone3     ==> 메소드의 실행순서는? 2-3-1
+       --->해결)
+                  새로운 변수 생성
+       phone = phone1+phone2+phone3  
+  
+  - UI회원정보를 보관할(한개의 변수명으로 저장할) 객체    MembershipVO
+                                            ---------------
+                                            DB테이블의 레코드 한개를 표현하는 객체
+  
+  
+  
+  
+3. 로그인
+  - LoginForm 입력값(아이디,비밀번호) 얻기
+  - MembershipDAO : findLogin()호출
+                        ---> DB조회  
+  - 아이디와 비밀번호 일치시 '로그인성공!!' 후 ServiceForm 이동.
+                            불일치시  '로그인실패!!'메시지 출력.
+                            
+                            
+4. 서비스폼(JTable): (전체)회원정보 출력
+  - LoginForm  ---로그인성공시--->  ServiceForm 이동시  전체 회원정보 JTable에 출력
+  - ServiceForm에서  '전체보기'버튼 클릭시        전체 회원정보 JTable에 출력
+  ===> MembershipDAO : findAll()의 결과값을 통해!!
+                         ---> DB조회
+
+
+
+    UI                     MembershipDAO                  DB테이블
+                              
+       액션                              ArrayList<VO> findAll()          membership (회원정보)
+                            ---> select~from~              각행 --> 회원한명
+                                 where X                    ---
+                                                            VO
+  준비:
+  ArrayList에 저장된
+  데이터를 출력할 컴포넌트!!
+  ----> JTable
+  
+=============================================================================
+5. 서비스폼(JTable): 회원정보 수정
+  5-1. ==> 이전에 저장된 (특정회원)데이터 조회!!  
+    - 입력대화상자 통해 수정 아이디 입력!!  
+    - MembershipDAO : findById()
+                      --->예상sql?  select ~ from ~ where id=? 
+                      findById(String id) <===파라미터                      
+                      VO findById(String id) <===리턴                      
+    - 리턴데이터를 출력할 UI ---> 수정폼 (UpdateForm)
+                             ===> 뷰 이동 (서비스폼 ---> 수정폼)
+  5-2. ==> 이전데이터 수정!!
+    - 아래 SQL에 필요한 데이터 ==> getText()  : 서비스폼으로 부터
+    - MembershipDAO : modify()
+                       ---> 예상sql?   update ~ set addr=? job=? ....
+                                               where id=?
+                      modify(VO)   <==== 매개변수  
+                      boolean modify(VO)  <==== 리턴
+                      
+    - 리턴에 의한 뷰이동: 서비스폼이동(수정성공시) 또는  수정폼에 머무르기(수정실패시)    
+                             
+=============================================================================
+6. 서비스폼(JTable): 회원삭제(탈퇴)
+    - 입력대화상자 통해 삭제 아이디 입력!!  
+
+    - MembershipDAO : remove()호출
+                    >>>예상되는 sql?   delete from ~
+                                            where id=?                 
+                      remove(String id)   <==== 매개변수
+                      boolean remove(String id)   <==== 리턴
+                      
+    - 리턴에 의한 뷰이동: 서비스폼에서 상황 메시지 출력(성공시 JTable에 데이터 반영)                      
+                       
+7. 서비스폼(JTable): 이름검색(입력된 문자를 포함하는)
+    - 입력대화상자 통해 조회 이름 입력!!  
+
+   //-------------------------------------------------------
+    - MembershipDAO : findByName()호출
+                     >>>예상되는 sql?    select ~ from ~
+                                       where name like ?
+                                       
+                      findByName(String name)    <==== 매개변수
+
+  ArrayList<MembershipVO> findByName(String name)    <==== 리턴
+   //-------------------------------------------------------
+  
+    - 리턴에 의한 뷰이동: 서비스폼에서 상황 데이터 출력(성공시 JTable에 데이터 반영)                      
+     
+
+8. 회원정보 입력(회원가입창) : 중복확인!! (중복아이디체크)
+
+        ※ 중복 체크할 아이디 얻기
+           첫번째 방법)
+         joinForm의 '등록'버튼 클릭시'
+                      또는
+         joinForm의 '중복확인'버튼 클릭시
+         ==> 회원가입폼.tf_id.getText() 이용하여  중복검사 
+           두번째 방법)              
+         '중복확인' 버튼 클릭시  
+            ==> 새로운 프레임 오픈  
+                                 예)  class CheckId extends JFrame{
+                          JTextField tf_id;
+                          JButton   bt_confirm;//확인
+                          
+                          CheckId(){
+                            setTitle("중복확인");
+                            setLayout(new FlowLayout());
+                            add(tf_id);
+                            add(bt_confirm);
+                          }
+                        }
+                        
+             ==> 입력대화상자 사용             
+                                   예)  String id = JOptionPane.showInputDialog("아이디입력");
+                                                    
+              세번째방법)
+             JoinForm에서 '중복확인'버튼 제거
+             JoinForm의 tf_id에  keyListener를 적용
+                      ==> 문자입력될때마다 중복체크해서 결과 보이기 
+                         
+   //---------------------------------------------------------
+   - MembershipDAO :  findExistId()
+                        >>>예상sql?   select count(*) from ~
+                                     where id=?
+                                     
+                      findExistId(String id)  <=== 파라미터                
+                  int findExistId(String id)  <=== 리턴 0,1                
+   //---------------------------------------------------------
+
+=============================================================================
+<기능추가>
+1. 입력폼(JoinForm)을 두번 이상 호출했을 때
+      이전에 입력된 데이터가 보이지 않게 설정.
+      
+   - initForm()메소드를 추가하여 각 JTextField에 대한 tf.setText("");
+   - new JoinForm() !!     
+       ==> eventUp()메소드에서 NullPointerException발생
+             ==> eventUp_join()메소드를 새로 생성하여
+                               회원가입폼과 관련된  add~Listener()호출 들을  옮김.
+                              예) private void eventUp_join(){
+                        joinForm.tf_id.addActionListener(this);
+                        ......
+                    }
+       ==> actionPerformed()메소드에서 NullPointerException발생
+             ==> null체크하는 코드 추가
+                              예) if(ob == joinForm.tf_id)  ---> 에러발생               
+                    if(joinForm!=null && ob == joinForm.tf_id)  ---> 실행^^               
+                    
+2. [관리자] 로그인 했을때 회원에 대한 수정 또는 삭제 실행
+         ----> DB에 관리자 아이디,비번 입력 (admin/manager)
+   [사용자] 로그인 했을때 본인 정보에 대한 수정 또는 삭제 실행.
+   
+   JMenuItem '인증' 클릭시
+        ---> admin아이디 로그인 상태이면 '인증되었습니다!!'
+        ---> 회원들에 대한 수정 또는 삭제 실행( 수정 또는 삭제할 아이디 묻기)
+        
+        ---> admin아이디가 아니라면(gildong,lime,juwon,....)
+               '관리자 로그인이 필요합니다'
+        ---> '관리자로 로그인하시겠습니까?'  ---> '예' ---> 로그인 폼 이동
+        
+   JMenuItem '인증'되지 않은 상태
+        ---> 수정 또는 삭제 버튼 클릭 (수정 또는 삭제할 아이디 묻지 않고 
+                                                         로그인한 사용자에 대한 수정 또는 삭제 처리)            
+               
+               
+               
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+   
