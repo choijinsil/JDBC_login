@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>폼태그 테스트(input태그)</title>
+</head>
+<body>
+	<h3>폼태그 테스트(input) 태그</h3>
+	<hr>
+
+	<h4>페이지 이동</h4>
+	<a href="hello.html">hello.html문서로 이동</a>
+
+	<hr>
+
+	<h4>(폼데이터 전송과 함께) 페이지 이동</h4>
+	<!-- enctype - 액션에게 텍스트로 전달하겠다.	 -->
+	<form action="hello.html" name="" method="post" >
+		기본 input: <input><br> 
+		아이디: <input type="text" value="기본아이디" name="id"><br>
+		비밀번호: <input type="password" name="pwd"><br>
+		주민번호: <input type="text" size="6" maxlength="6"> -  <input type="password" size="7" maxlength="7"><br>
+		<br>
+		
+		좋아하는 과일:  <input type="checkbox">사과
+					<input type="checkbox">딸기
+					<input type="checkbox">바나나
+					<br>
+					
+		당신의 강의실:  <input type="radio" name="name">1강의실
+					<input type="radio" name="name">2강의실
+					<input type="radio" name="name">3강의실
+					<input type="radio" name="name">4강의실 <br>
+		나보여? <input type="hidden" value="나데이터"><br>
+		파일업로드: <input type="file"><br>
+		운동: <select multiple="multiple" ><br>
+				<option>야구</option>
+				<option>축구</option>
+				<option selected>농구</option>
+				<option>배구</option>
+			</select><br>
+		비고: <textarea rows="5" cols="10">기본내용</textarea>
+		<br>
+		<!-- 버튼의 종류 -->
+		<input type="button" value="버튼1(type=button)">
+		<button>버튼2(button태그)</button>
+		<input type="submit" value="버튼3(type=submit)">
+		<input type="reset" value="버튼4(type=reset)"><br>					
+		<input type="submit" value="전송">
+	</form>
+</body>
+</html>

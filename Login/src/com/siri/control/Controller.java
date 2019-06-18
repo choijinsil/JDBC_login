@@ -299,6 +299,7 @@ public class Controller implements ActionListener {
 			MembershipDAO dao = new MembershipDAO();
 			// String name = serviceForm.showInput("검색할 이름을 입력해주세요.");
 			serviceForm.displayTable(dao.findSearch(serviceForm.optionMsg()));
+			
 			// serviceForm.displayTable(dao.findByName(name));
 
 		} else if (ob == serviceForm.bt_exit) {

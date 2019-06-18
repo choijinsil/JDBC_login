@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+
+<title>회원가입</title>
+	<script type="text/javascript">
+	</script>
+	<style type="text/css">
+		tr{
+			text-align: right;
+			background-color: "eeeeee";
+		}
+	</style>
+</head>
+
+
+<body>
+	<form action="hello.html" name="" method="get"> 
+		<table style="border:none;" cellpadding="5">
+		<tr>
+			<td>아이디:</td>
+			<td><input type="text" name="id" readonly="readonly"></td>
+			<!-- readonly 읽기전용, disabled 비활성화 -->
+			<td><input type="button" value="중복확인" ></td>
+		</tr>
+		
+		<tr>
+			<td>비번:</td>
+			<td><input type="password" name="psw"></td>
+		</tr>
+		
+		<tr>
+			<td>비번확인:</td>
+			<td><input type="password"></td>
+		</tr>
+		
+		<tr>
+			<td>주민번호:</td>
+			<td> <input type="text" size="6" maxlength="6" name="ssn1"> -  <input type="password" size="6" maxlength="7" name="ssn2"></td>
+		</tr>
+		
+		<tr>
+			<td>전화번호:</td>
+			<td><input type="text" size="1" maxlength="3" name="phone1"> -
+			    <input type="text" size="1" maxlength="3" name="phone2"> -
+			    <input type="text" size="2" maxlength="4" name="phone3"></td>
+		</tr>
+		
+		<tr>
+			<td>주 소:</td>
+			<td><input type="text" name="addr"></td>
+		</tr>
+
+		<tr >
+			<td>직업:</td>
+			<td> <select name="job" >
+					<option selected="selected">학생</option>
+					<option>공무원</option>
+					<option>언론/출판</option>
+					<option>군인/경찰</option>
+					<option>일반사무직</option>
+					<option>영업직</option>
+					<option>기술전문직</option>
+					<option>보건의료직</option>
+					<option>자영업</option>
+					<option>주부</option>
+					<option>기타</option>
+				</select></td>
+		</tr>
+		
+		<tr>
+			<td colspan="2" align="center">
+			<input type="submit" value="등록" alt="center">
+			<input type="reset" value="취소" alt="center">
+			</td>
+
+		</tr>
+			
+		</table>		
+	</form>
+</body>
+</html>

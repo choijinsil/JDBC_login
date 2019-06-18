@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script
+	src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+<script src="jquery-2.1.4.min.js"></script>
+<script src="jquery.flip.js"></script>
+
+<script>
+	$(document).ready(function() {
+		$('#card').click(function() {
+			$("#card").flip({
+				axis : 'x',
+				trigger : 'click'
+			});
+		});
+	});
+
+</script>
+<meta charset="EUC-KR">
+<title>플립테스트</title>
+</head>
+<body>
+	<h1>그림보이기</h1>
+
+	<div id="card">
+		<div class="front">
+			<img
+				src="https://cdn.pixabay.com/photo/2015/07/09/22/45/tree-838667_1280.jpg"
+				width="400" height="350">
+		</div>
+
+		<div class="back">
+			<img
+				src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
+				width="400" height="350">
+		</div>
+
+	</div>
+	<!--  $("#card").flip(); -->
+
+</body>
+</html>
