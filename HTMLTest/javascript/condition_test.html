@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>조건문 테스트</h3>
+	<hr>
+	<script type="text/javascript">
+		var flag = true;
+		if (flag) {
+			document.write('flag는 true다.')
+		}
+
+		if (3 < 4) {
+			document.write('<br> 3이 4보다 작아요')
+		}
+		// c언어에서는 true대신 1, false 대신 0을 사용하는 것이 가능
+		// 0은 false 0이아닌 모든 수 true 
+		if (1000) {
+			document.write('<br> = if를 실행')
+			document.write('<br> = else를 실행')
+		}
+
+		var str;
+		if (str) {
+			document.write('<br>족건식 문자열(객체) 테스트 :true')
+		} else {
+			document.write('<br>족건식 문자열(객체) 테스트 :false')
+		}
+		document.write('<hr>')
+
+		try {
+			if (ActiveXObject) {
+				//브라우저 IE  : true
+				document.write('<br>당신의 브라우저는 IE입니다!!');
+			} else {
+				//비IE: false
+				document.write('<br>당신의 브라우저는 IE가 아닙니다!!');
+			}
+		} catch (e) {
+			document.write('<br>당신의 브라우저는 IE가 아닙니다!!')
+		}
+
+		
+		
+		
+		
+	</script>
+
+</body>
+</html>

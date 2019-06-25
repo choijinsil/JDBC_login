@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>자바스크립트 페이지 이동</title>
+<script type="text/javascript">
+
+	function welcome1() {
+		// 현재 문서의 위치정보?
+		alert(document.location);
+		// getLocation 값을 가져오는것
+		
+		// set location이 되면서 페이지 이동 효과가 난다.
+		document.location='../welcome.html';
+		}
+
+	function welcome2() {
+		// 자바스크립트 페이지 이동시 주로 많이 사용
+		alert('현재위치: '+location.href);
+		location.href='../welcome.html';
+
+	}
+
+	// 히스토리를 완전 바꾼다. 뒤로가기가 안된다.
+	function welcome3() {
+		location.replace('../welcome.html');
+	}
+	
+	var flag=true;
+	function changeTitle() {
+		if(flag) document.title='즐거운 화요일 ~!!';
+		else document.title='자바스크립트 페이지 이동'
+		
+		flag!=flag;
+	}
+	// 크롬에선 실행이 안된다. 인터넷익스플로러에서만 실행됨.
+	document.linkColor='yellow';
+	// a태그 document.linkColor
+</script>
+</head>
+<body>
+	<h3>자바스크립트 페이지 이동</h3>
+	<hr>
+	<h4>HTML 페이지 이동</h4>
+
+	<a href="../welcome.html">welcome.html이동 </a>
+
+	<form action="../welcome.html">
+		<input type="text" name="username"><br>
+		<button type="submit">welcome.html이동(폼데이터 포함)</button>
+	</form>
+	<hr>
+	<h4>자바스크립트 이동</h4>
+	<!-- form태그의 버튼 클릭시 함수 호출 -->
+	<button onclick="welcome1()">welcome.html이동1</button>
+	<br>
+	<button onclick="welcome2()">welcome.html이동2</button>
+	<br>
+	<button onclick="welcome3()">welcome.html이동3</button>
+	<br>
+	<button onclick="changeTitle()">문서 제목바꾸기(document사용)</button>
+	<br>
+
+
+
+
+</body>
+</html>

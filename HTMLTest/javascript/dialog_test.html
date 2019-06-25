@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>대화상자 테스트</h3>
+	<hr>
+	<script type="text/javascript">
+		//메세지 대화상자:
+		alert('까\n꿍');
+
+		a = 10;
+		b = 20;
+		alert('a+b=' + (a + b));
+		var confirm = confirm('삭제하시겠습니까');
+
+		// 결과값은 boolean형으로 반환한다.
+		if (confirm) {
+			document.write('삭제가 완료되었습니다.!')
+		} else {
+			document.write('삭제하지 않았습니다.')
+		}
+
+		var fruit = prompt('좋아하는 과일은?', '좋아하는 과일을 입력해주세요.');
+
+		if (fruit != null) {
+			if (fruit == '') { // 빈값체크 str=='' str.length==0
+				alert('과일을 입력하세요!');
+			} else {
+				document.write('<br>당신이 좋아하는 과일은" ' + fruit + ' "이군요.')
+			}
+		}
+		//eval 함수는 첫번쨰 인자로 들어오는 인자값을 오브젝트로 변환해준다.
+	</script>
+
+</body>
+</html>

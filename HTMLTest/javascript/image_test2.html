@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>이미지테스트</title>
+  <script type="text/javascript" >
+     function imageChange2(imageName){//자바클래스와 등가, 자바스크립트 함수는 일급객체!!
+    	 console.log('img3의 이미지소스='+ document.img3.src);
+     
+    	 document.img3.src="../image/"+imageName+".jpg";
+    	 
+       /* if(imageName=='young')
+    	 document.img3.src="../image/young.jpg";
+       else if(imageName=='wedding')
+    	 document.img3.src="../image/wedding.jpg";
+       else if(imageName=='won')
+    	 document.img3.src="../image/won.jpg"; */
+     }
+  </script>
+</head>
+<body>
+  <h3>자바스크립트를 통한 이미지 조작</h3>
+  <hr>
+  <img name="img3"
+       src="../image/won.jpg"
+       width="400" height="500"
+       onmouseover="imageChange2('young')"
+       onmouseout="imageChange2('won')"
+       onmousedown="imageChange2('wedding')"
+       >
+  <!-- 
+    문제) 이미지(img3)에 마우스를 올리면 이나영 이미지로 변경,
+       이미지를 클릭하면 웨딩사진 이미지로 변경,
+       이미지를 벗어나면 원빈 이미지로 변경하는 
+       함수 imageChange2()를 정의하시오.
+   -->     
+</body>	
+</html>
+
+

@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>배열테스트</title>
+</head>
+<!-- array_test.html -->
+<body>
+  <h3>배열Array 테스트</h3>
+  <hr>
+  <script type="text/javascript">
+     //배열 객체 생성
+     var str = new String("문자열");
+     var myArry = new Array(5);//myArry[0]~myArry[4]할당
+     document.write("myArry배열크기 = "+ myArry.length );
+     
+     //배열안에 데이터 입력
+     myArry[0]=11;
+     myArry[1]=22;
+     myArry[2]=true;
+     myArry[3]="홍길동";
+     myArry[4]=new Date();
+     
+     myArry[5]='길라임';
+     myArry[6]=3.14;
+     //결론: 자바스크립트 배열은 여러 자료형을 입력받을 수 있고
+     //     가변길이 배열이다!!
+     
+     document.write('<br>데이터입력후 myArry배열크기= '+
+    		          myArry.length)
+     
+     //전체 데이터 출력
+     for(var i=0; i<myArry.length; i++){//배열 인덱스
+    	document.write('<br>myArry['+i+']='+myArry[i]); 
+     }
+     
+     document.write('<hr>');
+     //정해진 데이터(1,2,3,4,5)를 배열에 저장.
+     //var myArry2={1,2,3,4,5};//에러: {}데이터는 JSON에서 예약!!
+     //JSON ---> JavaScript Object Notation : 자바스크립트 객체를 표현하는 방법
+     //JSON형식)
+     //  {key:value,  key:value, ....}
+     //  자바의 Map과 같다.
+     // key==> 변수의 역할,  value==> 저장데이터   
+     
+     var person = {name:'홍길동', age:13, job:'학생',
+    		       etc:[100,200,300] };
+     //사용법:  (JSON)변수명.key명
+     document.write("<br>이름: "+ person.name);
+     document.write("<br>나이: "+ person.age);
+     document.write("<br>직업: "+ person.job);
+     
+     //etc의 두번째 데이터를 화면 출력하시오.
+     //person.etc == 배열
+     document.write('<br>etc의 데이터갯수: '+ person.etc.length);
+     document.write('<br>etc두번째데이터: '+ person.etc[1]);
+     
+     
+     document.write('<hr>');
+     
+     var myArry2=[1,2,3,4,5];//배열데이터는 []에 입력!!
+     
+     for(var i=0; i<myArry2.length; i++){//배열 인덱스
+     	document.write('<br>myArry2['+i+']='+myArry2[i]); 
+     }
+     
+     document.write('<hr>');
+     var myArry3= new Array(6,7,8,9,10);
+     
+     for(var i=0; i<myArry3.length; i++){//배열 인덱스
+      	document.write('<br>myArry3['+i+']='+myArry3[i]); 
+     }
+     
+     document.write('<hr>');
+     var fruits=new Array();
+     
+     //데이터 입력
+     fruits.push('사과');
+     fruits.push('딸기');
+     fruits.push('복숭아');
+     
+     //데이터 삭제(맨 마지막 요소부터)
+     fruits.pop();
+     fruits.pop();
+     
+     fruits.push("리치");
+     fruits.push("파인애플");
+     fruits.push("수박");
+     //사과,리치,파인애플,수박
+     // 0   1    2     3
+     
+     //fruits.slice(startIdx,endIdx);
+     document.write('<br>fruits='+fruits);
+     document.write('<br>fruits.slice(1)='+fruits.slice(1));
+     document.write('<br>fruits.slice(1,3)='+fruits.slice(1,3));
+     document.write('<br>fruits.join("^")='+fruits.join("^"));
+     //join()메소드: 특정문자를 포함한 새로운 문자열 생성
+     //결과값: "사과^리치^파인애플^수박"
+     
+     document.write('<br>fruits.reverse()='+fruits.reverse());
+     document.write('<br>fruits.sort()='+fruits.sort());
+     
+     for(var i=0; i<fruits.length; i++){//배열 인덱스
+       	document.write('<br>fruits['+i+']='+fruits[i]); 
+     }
+     
+     var persons = [
+         {name:"홍길동" , age:13 , job:"학생" }
+         ,         
+         {name:"길라임" , age:15 , job:"학생" }
+         ,         
+         {name:"김주원" , age:17 , job:"학생" }
+        ];
+     
+     
+     for (var i = 0; i < persons.length; i++) {
+	     document.write('<hr color=blue>이름: '+persons[i].name+', 나이: '+persons[i].age);
+	}
+     
+     
+  </script>
+ 
+</body>
+</html>
+
+
+
+
+

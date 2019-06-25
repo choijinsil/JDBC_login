@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>사용자 정의 함수</title>
+<script type="text/javascript">
+	function test() {
+		alert('까꿍')
+	}
+
+	function hello() {
+		alert('안녕')
+	}
+
+	function hello(name) {
+		alert(name)
+	}
+
+	function hello(name, age) {
+
+		alert('봉주르, ' + name + '!!\n 당신의 나이는 ' + age + '살 입니다.');
+	}
+
+	function hello(name, age) {
+		if (name == undefined) {
+			alert('안녕~');
+		} else if (age == undefined) {
+			alert('신짜오,' + name + '!!');
+		} else {
+			alert('봉주르, ' + name + '!!\n 당신의 나이는 ' + age + '살 입니다.');
+		}
+	}
+	prompt("입력", "초기값", "길동", "라임");
+</script>
+</head>
+<body>
+	<h3>사용자 정의 함수 테스트</h3>
+	<hr>
+	<input type="button" value="test" onclick="test()">
+	<button onclick="hello()">hello() 호출</button>
+	<!-- 덮어쓰기가 된다. -->
+	<button onclick="hello('하이')">hello(name) 호출</button>
+	<button onclick="hello('주원', 13)">hello(name, age) 호출</button>
+	<button onclick="hello('주원', 13,15)">hello(name, age, 그외) 호출</button>
+	<!--  인자수가 많더라도 있는것만 출력이 된다. -->
+
+</body>
+</html>

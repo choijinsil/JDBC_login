@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>이미지 테스트</title>
+
+<script type="text/javascript">
+	// 가로 400, 세로 500
+	function largeImage() {
+		document.img1.width = 800;
+		document.img1.height = 1000;
+	}
+	
+	// funtion은 메소드 이면서 객체 (자바 클래스와 나란함) object
+
+	function smallImage() {
+		document.img1.width = 200;
+		document.img1.height = 250;
+	}
+
+	function originImage() {
+		document.img1.width = 400;
+		document.img1.height = 500;
+	}
+
+	function changeImageSize(size) {
+
+		if (size == 'L') {
+			document.img1.width += 10;
+			document.img1.height += 10;
+		} else if (size == 'S') {
+			document.img1.width -= 10;
+			document.img1.height -= 10;
+		} else {
+			document.img1.width = 400;
+			document.img1.height = 500;
+		}
+	}
+	
+		var cnt=0;
+	function imageChange() {
+		
+		cnt++;
+		
+		if(cnt%2==1){
+			document.img2.src="image/won.jpg";
+		}else{
+			document.img2.src="image/young.jpg";
+			
+		}
+	}
+		
+	
+</script>
+</head>
+<body>
+	<h3>자바스크립트를 통한 이미지 조작</h3>
+	<hr>
+	<button onclick="changeImageSize('L')">크게</button>
+	<button onclick="changeImageSize('S')">작게</button>
+	<button onclick="changeImageSize('M')">원래대로</button>
+	<br>
+	<hr>
+
+	<img alt="img1" title="도움말" src="image/won.jpg" width="400" height="500" name="img1" ">
+
+	<hr>
+	<img alt="img2" src="image/young.jpg" name="img2" width="400" height="500" onclick="imageChange()">
+	
+	<!-- 원빈 이미지를 클릭하면 이나영 이미지로 변환 -->
+
+	<!-- 
+	<button onclick="largeImage()" >크게</button>
+	<button onclick="smallImage()" >작게</button>
+	 -->
+
+</body>
+</html>

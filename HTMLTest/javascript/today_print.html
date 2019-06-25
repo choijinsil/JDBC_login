@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>오늘의 날짜출력</title>
+   <script type="text/javascript">
+      function printDate(){
+    	  var now = new Date();//now: 현재 날짜의 모든 정보가 저장.
+          var dayStr=['일','월','화','수','목','금','토'];
+          //dayStr의 자료형? Array배열!!
+        		  
+          var dayStr='일월화수목금토';  
+          //          0123456
+          //dayStr의 자료형? String문자열!!
+          
+          
+          var year = now.getFullYear();
+          var month = now.getMonth()+1;//1월~12월 :0~11 
+          var date = now.getDate();
+          var h = now.getHours();
+          var m = now.getMinutes();
+          var s = now.getSeconds();
+          var day = now.getDay();//일요일~토요일 (0~6)
+          /*
+          document.write(year+'년 '+month+'월 '+date+'일 '+
+        		  h+'시 '+m+'분 '+s+'초 ('+dayStr[day]+'요일)');
+          
+          document.write('<br>'+year+'년 '+month+'월 '+date+'일 '+
+        		  h+'시 '+m+'분 '+s+'초 ('+dayStr.substr(day,1)+'요일)');
+          
+          document.write('<br>'+year+'년 '+month+'월 '+date+'일 '+
+        		  h+'시 '+m+'분 '+s+'초 ('+dayStr.charAt(day)+'요일)');
+          */
+          
+          var str=year+'년 '+month+'월 '+date+'일 '+
+		           h+'시 '+m+'분 '+s+'초 ('+dayStr.charAt(day)+'요일)';
+          
+          var d1 = document.getElementById('d1');
+          //d1의 자료형? Element ---> 속성 innerHTML
+          d1.innerHTML = str;	
+          setTimeout('printDate()', 1000)
+          // 1초후에 printDate()를 호출
+      }//printDate
+   </script>
+</head>
+<!-- today_print.html -->
+<body onload="printDate()">
+<!-- 
+   <body onload="">
+   ==> <body>엘리먼트의 내용이 브라우저에 전체 출력(로딩)되었을때
+ -->
+  <h3>오늘의 날짜출력</h3>
+  <hr>
+  <div id="d1"></div>
+  <!-- 
+        브라우저 화면에 현재시각 '2019년 6월 24일 10시 3분 30초 (월요일)'을 출력하시오.
+    ==> koxo.com 사이트에서  Date()객체 참조.     
+   -->
+ 
+   
+</body>
+</html>
+
+
+

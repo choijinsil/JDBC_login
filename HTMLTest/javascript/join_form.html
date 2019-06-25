@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>회원가입폼</title>
+  <script type="text/javascript">
+     /*
+        '등록'버튼 클릭시 validCheck()호출  ----> 유효성검사
+        
+        1. 아이디, 비번, 비번확인, 이름, 주민번호, 주소에 대한 빈값 체크
+          --->빈값일때 입력 메시지(alert)출력
+        2. 비번과 비번확인 일치 체크
+        3. 주민번호의 숫자값과 자릿수 체크
+        4. 직업을 선택했는지 체크
+        
+        ==> 1~4 체크가 잘 되었을때 welcome.html페이지로 이동!!
+        ==> <form>태그의 속성 action에 명시된 url이동!! ---> submit()함수 사용.
+        ==> document.form명.submit();
+     */
+     
+     //사용자가 입력한 데이터에 대한 유효성검사
+     function validCheck(){
+    	 //폼태그내의 데이터 가져오기:  document.폼이름.지정이름.value
+    	 var f = document.joinForm;
+    	 //var id =document.joinForm.id.value;
+    	 var id= f.id.value;
+    	 var pass= f.pass.value;
+    	 var pass2= f.pass2.value;
+    	 var name= f.name.value;
+    	 var ssn1= f.ssn1.value;
+    	 var ssn2= f.ssn2.value;
+    	 var addr= f.addr.value;
+    	 
+    	 if(id===''){
+    		 alert('아이디입력!!');
+    		 f.id.focus();
+    	 }else if(pass==''){
+    		 alert('비번입력!!');
+    		 f.pass.focus();
+    	 }else if(pass2==''){
+    		 alert('비번입력!!');
+    		 f.pass2.focus();
+    	 }else if(pass != pass2){//비번 일치 확인
+    		 alert('비밀번호가 일치하지 않습니다!!');
+    	     f.pass.value='';
+    	     f.pass2.value='';
+    	     f.pass.focus();
+    	 }else if(name==''){
+    		 alert('이름입력!!');
+    		 f.name.focus();
+    	 }else if(ssn1=='' || ssn2==''){
+    		 alert('주민번호입력!!');
+    		 f.ssn1.focus();
+    	 }else if(isNaN(ssn1) || isNaN(ssn2) ||
+    	ssn1.length != 6  || ssn2.length != 7){
+    		 //주민번호 숫자와 자릿수체크
+    		 alert('올바르지 않은 주민번호입니다!!');
+    		 f.ssn1.value='';
+    		 f.ssn2.value='';
+    		 f.ssn1.focus();
+    	 }else if(addr==''){
+    		 alert('주소입력!!');
+    		 f.addr.focus();
+    	 }else if(f.job.value=='==선택=='){
+    		 //직업선택
+    			alert('직업선택!!');
+    			f.job.focus();
+    	
+    	 }else{
+    		 f.submit();//form태그에 명시된 속성 action의 URL로 이동.
+    	 }
+     }//validCheck()
+     
+     function juminMove(){
+        console.log('ssn1의 입력값>>>'+ 
+               document.joinForm.ssn1.value);
+       if(document .joinForm   .ssn1       .value. length==6){
+  //자료형  Document  Form엘리먼트  Input엘리먼트    String
+             document.joinForm.ssn2.focus();
+       }
+     }
+  </script>
+  
+</head>
+<!-- join_form.html -->
+<body>
+  <center>
+  <h3>회원가입폼</h3>
+ <form name="joinForm" action="welcome.html">
+  <table  cellpadding="5" bgcolor="eeeeee">
+    <tr >
+		<td>I D:</td>
+		<td><input type="text" name="id"> 
+		    <input type="button" value="중복확인"
+		           tabindex="-1" >
+		</td>
+		<!-- 
+		     <input>태그의 속성
+	     readonly    ===> 읽기전용(쓰기금지)  : 자바 setEditable(false)
+	     disabled    ===> 비활성화                   : 자바 setEnabled(false)
+		 -->
+    </tr>
+    <tr>
+		<td>비 번:</td>
+		<td><input type="password" name="pass"> </td>
+    </tr>
+    <tr>
+		<td>비번확인:</td>
+		<td><input type="password" name="pass2"></td>
+    </tr>
+    <tr>
+		<td>이 름:</td>
+		<td><input type="text" name="name"></td>
+    </tr>
+    <tr>
+		<td>주민번호:</td>
+		<td><input type="text" name="ssn1" 
+		           size="6"
+		           maxlength="6"
+		           onkeyup="juminMove()" >
+		     -
+		    <input type="password" 
+		           name="ssn2" 
+		           size="7"
+		           maxlength="7">
+		</td>
+    </tr>
+    <tr>
+		<td>전화번호:</td>
+		<td><input type="text" name="phone1" size="4"> -
+		    <input type="text" name="phone2" size="4"> -
+		    <input type="text" name="phone3" size="4">
+		</td>
+    </tr>
+    <tr>
+		<td>주소</td>
+		<td><input type="text" name="addr"></td>
+    </tr>
+    <tr>
+		<td>직업</td>
+		<td>
+		     <select name="job">		
+		        <option>==선택==</option>	  
+		        <option>학생</option>
+		        <option>공무원</option>
+		        <option>언론/출판</option>
+		        <option>군인/경찰</option>
+		        <option>일반사무직</option>
+		        <option>영업직</option>
+		        <option>기술/전문직</option>
+		        <option>보건/의료</option>
+		        <option>자영업</option>
+		        <option>주부</option>
+		        <option>기타</option>
+		     </select>
+		</td>
+    </tr>
+    <tr>
+		<td colspan="2" align="center">
+		<!-- 
+		   <button type="submit" onclick="validCheck()">등록</button>
+		     ==> 1. onclick에 명시된 자바스크립트 코드 실행후
+		            type='submit'이므로  
+		        2. action속성에 명시된 URL이동
+		  -->  
+		   <button type="button" onclick="validCheck()">등록</button>
+		   <button type="reset">취소</button>
+		</td>		
+    </tr>
+    </table>
+   </form> 
+  </center>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<!-- getDatatest.html -->
+<body>
+	<h3>데이터값 얻어오기</h3>
+	<script type="text/javascript">
+		function printData() {
+			
+			var id=document.getElementById('_id').value; // id값으로 찾는 방법
+			var pwd=document.frm.pwd.value; // name으로 찾는 방법
+			
+			// 자바스크립트는 name이 동일하면 자동으로 배열이 된다.
+			var fruit=document.frm.fruit;
+			var selectFruit='';
+			for (var i = 0; i < fruit.length; i++) {
+				if(fruit[i].checked){
+					selectFruit += fruit[i].value;
+				}
+			}
+			
+			var room=document.frm.room;
+			for (var i = 0; i < room.length; i++) {
+				if(room[i].checked){
+					room=room[i].value;
+					break;
+				}
+			}
+			// 히든이 필요한 이유는? 
+			var hide=document.frm.hide.value;
+			
+			var myfile=document.frm.myfile.value;
+			var sports=document.frm.sports.value;
+			var note=document.frm.note.value;			
+			
+			alert('아이디>>'+id+'\n비번>>'+pwd+'\n좋아하는 과일>>'+selectFruit+'\n강의실>>'+room
+					+'\n히든>>'+hide+'\n파일>>'+myfile+'\n스포츠>>'+sports+'\n비고>>'+note);
+		}
+	</script>
+	<hr>
+	<form name="frm" >
+		기본 input: <input><br> 
+		아이디: <input type="text" name="id" id="_id" ><br>
+		비밀번호: <input type="password" name="pwd"><br>
+		
+		좋아하는 과일:  <input type="checkbox" name="fruit" value="사과">사과
+					<input type="checkbox" name="fruit" value="딸기">딸기
+					<input type="checkbox" name="fruit" value="바나나">바나나
+					<br>
+					
+		당신의 강의실:  <input type="radio" name="room" value="1강의실">1강의실
+					<input type="radio" name="room" value="2강의실">2강의실
+					<input type="radio" name="room" value="3강의실">3강의실
+					<input type="radio" name="room" value="4강의실">4강의실 <br>
+		나보여? <input type="hidden" value="지킬박사" name="hide"><br>
+		파일업로드: <input type="file" name="myfile"><br>
+		운동: <select multiple="multiple" name="sports"><br>
+				<option>야구</option>
+				<option>축구</option>
+				<option selected>농구</option>
+				<option>배구</option>
+			</select><br>
+		비고: <textarea rows="5" cols="10" name="note"></textarea>
+		<br>
+		
+		<button type="button" onclick="printData()">등록</button>
+	</form>
+	
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+	<script type="text/javascript">
+	
+		function changeP() {
+			
+			document.getElementById('p').innerHTML='<font size=10 color=red>즐거운 화요일 ~!!</font>';
+			// innerText 는 태그도 문자로 인식한다.
+		}
+		
+		
+		var ids=['gildong','lime','juwon','siri'];
+		var idx=0;
+		function addButton() {
+			
+			document.getElementById('div').innerHTML+='<button>'+ids[idx]+'</button>';
+			idx++;
+			
+			if(idx==4){
+				idx=0;
+			}
+		}
+		
+		function addButton2() {
+			var div= document.getElementById('div');
+			var b = document.createElement('button');// <button></button>
+			// b의 자료형은 element
+			b.innerHTML='번쩍길동';	
+			div.appendChild(b); // 부모 안에 자식 
+		}
+		
+		function removeButtons() {
+			document.getElementById('div').innerHTML='';
+		}
+		
+		// 인스톨러 정리하기.
+	</script>
+</head>
+<body>
+	<h3>innerHTML 테스트</h3>
+	<hr>
+	<p id="p"><strong>자바스크립트</strong></p>
+	<button onclick="changeP()">클릭!!</button>
+	<br>
+	<hr>
+	<button onclick="addButton()">버튼 생성</button><br>
+	<div id="div"></div>
+	
+	<button onclick="addButton2()">버튼 생성</button><br>
+	<button onclick="removeButtons()">전체 버튼 지우기</button><br>
+	
+</body>
+</html>

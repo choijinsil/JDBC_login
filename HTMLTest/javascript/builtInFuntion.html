@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>내장함수(기본함수)</h3>
+	<script type="text/javascript">
+		var a = '100';
+		var b = 100;
+
+		document.write('a+b= ' + (a + b));
+		document.write('<br>eval(a)+b= ' + (eval(a) + b));
+		// eval('형식을 갖는 문자열') ---> Object반환(JSON)
+		// JSON형식 { key:value, key2:value }
+		var v = {
+			name : '홍길동',
+			age : 13
+		}
+		document.write('<br>이름 = ' + v.name)
+
+		var v2 = '{name:"홍길동",age:13}'
+		document.write('<br>이름 = ' + v2.name)
+
+		var v3 = eval('(' + v2 + ')'); // json은  () 안에 넣어야 한다. 범위를 표현
+		document.write('<br>이름 = ' + v3.name)
+
+		var c = '3.14';
+		var d = 300;
+		document.write('<br>c+d=' + (c + d));//'3.14300'
+		document.write('<br>parseInt(c)+d=' + (parseInt(c) + d));//303
+		document.write('<br>parseFloat(c)+d=' + (parseFloat(c) + d));//303.14
+
+		var e = '15a';// e변수의 숫자조합 체크
+		// isNaN(데이터)  : 데이터 전체가 숫자조합이 아닌 경우 true리턴
+		// NaN  : Not a Number   ==> 숫자가 아니였을때!!
+
+		document.write('<br>isNaN(e) = ' + isNaN(e)); // 너 숫자 아니지? isNaN() , 숫자면 false, 아니면 true 
+
+		//escape('데이터')   ---->   2바이트 문자를 16진수로 변환                 
+		document.write('<br>escape("a123@") = ' + escape("a123@"));
+		document.write('<br>escape("홍길동") = ' + escape("홍길동"));
+		//홍길동 ---> %uD64D%uAE38%uB3D9
+
+		//unescape('데이터')   ----> 16진수를 문자로 변환
+		document.write('<br>unescape("%uD64D%uAE38%uB3D9") = '
+				+ unescape("%uD64D%uAE38%uB3D9"));
+		
+		function fun1() {
+			
+		} // return
+	</script>
+</body>
+</html>
