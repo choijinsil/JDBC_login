@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- root.xml -->
+<!-- 
+    XML문서의 규칙(형식)정의 ==> DTD, XML Schema
+ -->
+ <!-- 내부 DTD -->
+ <!DOCTYPE root[
+ 	<!ATTLIST   a
+ 				x CDATA #REQUIRED
+ 				y CDATA #IMPLIED 
+ 				z CDATA #FIXED "30"
+ 				gender (남성|여성)>
+ 	<!ELEMENT b (#PCDATA)>
+ 	<!ELEMENT c (#PCDATA)>
+ 	
+ ]>
+ 
+<root>
+   <a x="10" y="20" z="30" gender="남성" >첫번째태그</a>
+   <b>안녕하세요</b>
+   <c>장마시작</c>
+</root> 

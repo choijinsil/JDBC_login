@@ -10,7 +10,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import com.siri.model.dao.MembershipDAO;
+import com.siri.model.dao.MembershipDAO2;
+import com.siri.model.dao.MembershipDAO2;
 import com.siri.model.vo.MembershipVO;
 import com.siri.view.JoinForm;
 import com.siri.view.LoginForm;
@@ -86,7 +87,7 @@ public class Controller implements ActionListener {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				int num = new MembershipDAO().findExistId(joinForm.tf_id.getText());
+				int num = new MembershipDAO2().findExistId(joinForm.tf_id.getText());
 				System.out.println("keyReleased>>>" + joinForm.tf_id.getText());
 				if (num == 1) {
 					// 텍스트 바꾸는 건 forground
@@ -137,10 +138,10 @@ public class Controller implements ActionListener {
 		Object ob = e.getSource();
 
 		if (ob == loginForm.bt_login) {
-			MembershipDAO dao = new MembershipDAO();
+			MembershipDAO2 dao = new MembershipDAO2();
 			boolean isOk = dao.findLogin(loginForm.tf_id.getText(), new String(loginForm.tf_pass.getPassword()));
 
-			String isAdmin = new MembershipDAO().findAdmin(loginForm.tf_id.getText(),
+			String isAdmin = new MembershipDAO2().findAdmin(loginForm.tf_id.getText(),
 					new String(loginForm.tf_pass.getPassword()));
 
 			// 로그인시 admin이면 true, 사용자면 false
@@ -173,7 +174,7 @@ public class Controller implements ActionListener {
 //			}
 
 		} else if (ob == joinForm.bt_submit) {
-			MembershipDAO dao = new MembershipDAO();
+			MembershipDAO2 dao = new MembershipDAO2();
 			System.out.println("회원가입완료버튼");
 			MembershipVO vo = new MembershipVO();
 			vo.setId(joinForm.tf_id.getText().toString());
@@ -204,11 +205,11 @@ public class Controller implements ActionListener {
 			}
 
 		} else if (ob == serviceForm.bt_sel_all) {
-			MembershipDAO dao = new MembershipDAO();
+			MembershipDAO2 dao = new MembershipDAO2();
 			serviceForm.displayTable(dao.findAll());
 
 		} else if (ob == serviceForm.bt_up) {
-			MembershipDAO dao = new MembershipDAO();
+			MembershipDAO2 dao = new MembershipDAO2();
 			String id = serviceForm.showInput("수정할 아이디를 입력해주세요!");
 			MembershipVO vo = dao.findById(id);
 			// 본인 아이디만 수정 삭제 가능하게 하기
@@ -232,7 +233,7 @@ public class Controller implements ActionListener {
 				}
 			} else {
 				// 관리자가 아닐때
-				String isAdmin = new MembershipDAO().findAdmin(loginForm.tf_id.getText(),
+				String isAdmin = new MembershipDAO2().findAdmin(loginForm.tf_id.getText(),
 						new String(loginForm.tf_pass.getPassword()));
 				if (id.equals(isAdmin)) {
 					serviceForm.setVisible(false);
@@ -244,7 +245,7 @@ public class Controller implements ActionListener {
 			}
 		} else if (ob == updateForm.bt_submit) {
 			// 텍스트값 가져와서 vo만들기
-			MembershipDAO dao = new MembershipDAO();
+			MembershipDAO2 dao = new MembershipDAO2();
 			String id = updateForm.tf_id.getText().toString();
 			String phone = updateForm.tf_phone1.getText() + "-" + updateForm.tf_phone2.getText() + "-"
 					+ updateForm.tf_phone3.getText();
@@ -270,7 +271,7 @@ public class Controller implements ActionListener {
 			}
 
 		} else if (ob == serviceForm.bt_del) {
-			MembershipDAO dao = new MembershipDAO();
+			MembershipDAO2 dao = new MembershipDAO2();
 			String id = serviceForm.showInput("삭제할 아이디를 입력해주세요.");
 			// 관리자가 true라면
 			if (possDml == true) {
@@ -282,7 +283,7 @@ public class Controller implements ActionListener {
 				}
 				// 관리자 false라면
 			} else {
-				String isAdmin = new MembershipDAO().findAdmin(loginForm.tf_id.getText(),
+				String isAdmin = new MembershipDAO2().findAdmin(loginForm.tf_id.getText(),
 						new String(loginForm.tf_pass.getPassword()));
 
 				if (id.equals(isAdmin)) {
@@ -296,7 +297,7 @@ public class Controller implements ActionListener {
 			}
 		} else if (ob == serviceForm.bt_sel_name) {
 			// 이름 검색하기
-			MembershipDAO dao = new MembershipDAO();
+			MembershipDAO2 dao = new MembershipDAO2();
 			// String name = serviceForm.showInput("검색할 이름을 입력해주세요.");
 			serviceForm.displayTable(dao.findSearch(serviceForm.optionMsg()));
 			
@@ -308,7 +309,7 @@ public class Controller implements ActionListener {
 
 		} else if (ob == serviceForm.item_confirm) {
 //			if ("인증".equals(serviceForm.item_confirm.getText())) {
-			String isAdmin = new MembershipDAO().findAdmin(loginForm.tf_id.getText(),
+			String isAdmin = new MembershipDAO2().findAdmin(loginForm.tf_id.getText(),
 					new String(loginForm.tf_pass.getPassword()));
 
 			if ("admin".equals(isAdmin)) {

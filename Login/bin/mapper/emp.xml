@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd" >
+
+
+<sqlMap namespace="empcopy">
+	<insert id="insert1">
+		insert into empcopy(empno,ename, sal, deptno) values(8000,'gildong',3000,20);
+		
+	</insert>
+	<insert id="insert2"></insert>
+	
+	<select id="select"></select>
+	
+
+</sqlMap>

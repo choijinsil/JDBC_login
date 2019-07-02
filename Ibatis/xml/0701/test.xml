@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- test.xml -->
+<root>
+  <a x='10' y="20">hello</a>
+  <b>goodDay</b>
+</root>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+       targetNamespace="http://www.example.org/my_schema" 
+       xmlns:tns="http://www.example.org/my_schema" 
+       elementFormDefault="qualified">
+ <!-- my_schema.xsd -->
+ <!-- 태그(엘리먼트 정의) -->
+ <!-- DTD경우
+      <!ELEMENT root (#PCDATA)>
+  -->
+ <element name="root">
+   <complexType>
+      <sequence>
+         <element name="su" 
+                  minOccurs="1" 
+                  maxOccurs="5"
+                  type="positiveInteger"/>
+                  
+         <element name="jumin" type="tns:juminType"></element>
+         <element name="cupSize"
+                  type="tns:cupType"
+                  minOccurs="1"
+                  maxOccurs="unbounded"></element>
+      </sequence>
+   </complexType>
+ </element>
+ 
+ <!-- 사용자 정의 자료형(패턴,list,union) -->
+ <!-- 주민번호자료형 -->
+ <simpleType name="juminType">
+    <restriction base="string">
+       <pattern value="\d{6}-\d{7}"></pattern>
+    </restriction>
+ </simpleType>
+ 
+ <!-- 컵사이즈에 대한 수치정의(10~50) -->
+ <simpleType name="cupType1">
+   <restriction base="positiveInteger">
+      <minInclusive value="10"/>
+      <maxInclusive value="50"/>
+   </restriction>
+ </simpleType>
+
+ <!-- 컵사이즈에 대한 문자정의 -->
+ <simpleType name="cupType2">
+   <restriction base="string">
+      <enumeration value="small"/>
+      <enumeration value="medium"/>
+      <enumeration value="large"/>
+   </restriction>
+ </simpleType>
+ 
+ <!-- 위의 두개의 사용자 정의 자료형 묶어주기 -->
+ <simpleType name="cupType">
+    <union memberTypes="tns:cupType1 tns:cupType2"/>
+ </simpleType>
+ 
+</schema>
+
+
+
+
+

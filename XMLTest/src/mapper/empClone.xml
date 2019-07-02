@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd" >
+<sqlMap namespace="empClone">
+	<!-- 사원 lime (8000번, 'lime', 2000, 30) 추가 -->
+	<!-- typeAlias: 패키지 이름과 클래스 이름이 긴 경우 단축된 이름을 사용 -->
+	<typeAlias alias="emp" type="com.siri.ibatis.EmpVO" />
+	<insert id="create">
+		insert into empClone values(8000, 'lime', 2000, 30)
+	</insert>
+
+	<insert id="insert" parameterClass="com.siri.ibatis.EmpVO">
+		insert into empClone
+		values(#empno#,#ename#,#sal#,#deptno#)
+	</insert>
+
+	<delete id="delete">
+		delete from empClone where ename=#ename#
+	</delete>
+
+	<update id="update">
+		update empClone set sal=6000 where ename=#ename#
+	</update>
+	
+	<select id="selectEname" parameterClass="int" resultClass="String">
+		select ename from empClone where empno=#empno#
+	</select>
+	
+	<select id="select30Enames" parameterClass="int" resultClass="String" >
+		select ename from empClone where deptno=#deptno#
+	</select>
+	
+	<select id="selectDeptno" parameterClass="int" resultClass="emp">
+		select empno, ename, sal, deptno from empClone where deptno=#deptno#
+	</select>
+	
+	<!-- resultClass속성에 Hashmap을 정의하는 경우 select문 뒤에 있는 컬럼명이 Map에 저장되는 Key값의 역할 -->
+	<select id="selectEmpInfo" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+	<![CDATA[
+		select ename, sal from empClone where deptno=#deptno# and sal<=#sal#
+	]]>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,83 @@
+
+
+<DOM>
+- XML파서 (xml문서내의 데이터를 분석하는 도구)
+- Document                /        Object Model
+ (xml형식을 갖는 문서,HTML)
+    text         -----파서 거쳐----->   메모리    데이터
+- 트리기반의 파서
+
+<DOM API>  ----> 메모리상의 데이터에 대한 프로그램!!
+1. Node
+   - XML문서를 구성하는 요소들의 공통적인 특성
+    (DOM트리에 표현되는 요소들)
+   - 모든 요소들의 부모클래스
+   
+     메소드)
+     - 노드 정보를 얻거나 정하는(get,set) 메소드
+        nodeType  (1~12   ---> ELEMENT_NODE ... TEXT_NODE)
+        nodeName  (태그이름, 속성이름)
+        nodeValue (속성값, 텍스트값, 설명문값)
+     
+     - 조작(추가,삭제,수정)메소드
+        appendChild
+        insertBefore
+        removeChild
+        replaceChild
+     
+     - 관계(부모,자식,형제)메소드
+        parent
+        child
+        sibling          
+
+2. Document
+   - 문서객체
+   - 위치불변: rootElement바로 위(부모)
+             ---> 루트엘리먼트 구하기 (documentElement)
+             ---> 루트엘리먼트 설정
+   - 생성관련 메소드 (create~)
+      createElement("태그명");
+      createAttribute
+      createText
+      createCDATASection
+      
+   - 짭잘한 메소드      
+      Element  getElementById(String 아이디값);
+      NodeList getElementsByTagName(String 태그명);
+              
+3. Element
+   - 속성관련 메소드
+      hasAttribute
+      getAttribute(속성명)
+      setAttribute(속성명,속성값)  ==> 태그내에 새로운 속성 생성
+      removeAttribute(속성명)     ==> 태그내에 존재하는 속성 삭제
+-----------------------------------------------------------
+4. NodeList
+   - DOM트리 표현되는 노드들을 저장하는 객체.
+   - 단, Attribute제외
+   - length            ==> 저장된 전체 노드수
+   - Node item(index)  ==> 저장된 노드 한개 얻어오기
+
+5. NamedNodeMap
+   - 특정태그(엘리먼트)에 속한 속성들을 저장하는 객체.
+   - length            ==> 저장된 속성들의 수
+   - Node item(index)  ==> 저장된 속성 한개 얻어오기
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd" >
+<!-- membership.xml ==> sql문을 저장하는 XML문서 -->
+<sqlMap namespace="member">
+	<typeAlias alias="member"
+		type="com.encore.j0612.model.vo.MembershipVO" />
+
+	<insert id="create" parameterClass="member">
+		insert into membership
+		(id,pass,name,ssn1,ssn2,phone,addr,job)
+		values
+		(#id#,#pass#,#name#,#ssn1#,#ssn2#,#phone#,#addr#,#job#)
+	</insert>
+
+	<update id="modify" parameterClass="member">
+		update membership set
+		pass=#pass#, phone=#phone#, addr=#addr#,job=#job#
+		where id=#id#
+	</update>
+
+	<delete id="remove" parameterClass="String">
+		delete from membership where
+		id=#id#
+	</delete>
+
+	<select id="findExistId" parameterClass="String"
+		resultClass="int">
+		select count(*) as count from membership where id=#id#
+	</select>
+	<select id="findAll" resultClass="member">
+		select
+		id,name,ssn1,ssn2,phone,addr,job
+		from membership where id!='admin'
+	</select>
+
+	<select id="findByName" parameterClass="String"
+		resultClass="member">
+		select id,name,ssn1,ssn2,phone,addr,job from membership
+		where name like #name#
+	</select>
+
+	<select id="findSearch" parameterClass="java.util.Map" resultClass="">
+		
+	</select>
+
+	<select id="findById" parameterClass="String" resultClass="">
+		select id,pass,name,ssn1,ssn2,phone,addr,job from membership where
+		id=#id#
+	</select>
+
+	<select id="findLogin" parameterClass="java.util.Map" resultClass="int">
+		select count(*) from membership where id=#id# and pass=#pass#
+	</select>
+	
+	<select id="findLogin2" parameterClass="String" resultClass="String">
+		select pass from membership where id=#id#
+		</select>
+</sqlMap>
+
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+ <!-- 띄어쓰기 필수 -->
+<!ELEMENT 팩스 (수신, 발신, 날짜, 제목, 내용)>
+  <!ATTLIST  팩스
+                       요망사항 (긴급|답신요망) #REQUIRED>
+  <!ELEMENT 수신 (수신처, 수신자, 연락처)> 
+     <!ELEMENT 수신처 (#PCDATA)>
+     <!ELEMENT 수신자 (#PCDATA)>
+        <!ATTLIST 수신자 
+                                 직위  (사원|대리|과장)  "사원">
+     <!ELEMENT 연락처 (전화번호?,팩스번호)>
+        <!ELEMENT 전화번호 (#PCDATA)>
+        <!ELEMENT 팩스번호 (#PCDATA)>
+  <!ELEMENT 발신 (발신처, 발신자, 연락처)>
+     <!ELEMENT 발신처 (#PCDATA)>
+     <!ELEMENT 발신자 (#PCDATA)>
+        <!ATTLIST 발신자
+                                  직위  CDATA #IMPLIED>
+  <!ELEMENT 날짜 (#PCDATA)>
+  <!ELEMENT 제목 (#PCDATA)>
+  <!ELEMENT 내용 (인사말, 본문)>
+     <!ELEMENT 인사말 (#PCDATA)>
+     <!ELEMENT 본문 (#PCDATA)>
+     
+     
+     
+   
+   
+  
+  
+  
+  
+   
+     
+      

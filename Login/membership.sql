@@ -1,22 +1,24 @@
 
-drop table membership;
-create table membership(
-	id varchar2(20) constraint membership_pk primary key,
-	pass varchar2(20) not null,
-	name varchar2(20) not null,
-	ssn1 number(6) not null,
-	ssn2 number(7) not null,
-	phone varchar2(14),
-	addr varchar2(100),
-	job varchar2(30)
+
+
+-- membership.sql
+
+
+create table membership2(
+   id      varchar2(20) constraint memberships_pk primary key,
+   pass    varchar2(20) not null,
+   name    varchar2(20) not null,
+   ssn1    number(6)    not null,
+   ssn2    number(7)    not null,
+   phone   varchar2(14), -- '010-1234-5678'
+   addr    varchar2(100),
+   job     varchar2(30)
 );
 
-insert into membership values ('gildong','1234','È«±æµ¿',900203,1012345,'010-1234-5678','³²ÅÍ','ÇĞ»ı');
-insert into membership values ('lime','9999','±æ¶óÀÓ',900203,2012345,'010-2222-5678','°íÅÍ','ÇĞ»ı');
-insert into membership values ('juwon','7777','±èÁÖ¿ø',900801,1012345,'010-3333-5678','»óÅÍ','ÇĞ»ı');
-insert into membership values ('gildong2','1235','È«ÁÖ¿ø',700203,1012345,'010-1234-4321','¼ö¿ø','³²¿ø');
-select * from membership;
+-- ì»¬ëŸ¼: id,pass,name,ssn1,ssn2,phone,addr,job
 
-delete from membership where name='Ä«Ä«¿À';
-
-insert into membership (id,pass,name,ssn1,ssn2) values('admin','manager','°ü¸®ÀÚ',111111,2222222);
+insert into membership2 values ('gildong','1234','í™ê¸¸ë™',900203,1012345,'010-1234-5678','ë‚¨í„°','í•™ìƒ');
+insert into membership2 values ('lime','9999','ê¸¸ë¼ì„',900203,2012345,'010-2222-5678','ê³ í„°','í•™ìƒ');
+insert into membership2 values ('juwon','7777','ê¹€ì£¼ì›',900801,1012345,'010-3333-5678','ìƒí„°','í•™ìƒ');
+insert into membership2(id, pass, name, ssn1, ssn2) values ('admin', 'manager', 'ê´€ë¦¬ì', 921126, 2012345);
+select * from MEMBERSHIP2;

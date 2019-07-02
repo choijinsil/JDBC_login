@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- books3.xml -->
+<!DOCTYPE books [
+    <!ELEMENT books (book)+>
+    <!ELEMENT book (title,author,price)>
+    <!ELEMENT title (#PCDATA)>
+    <!ELEMENT author (#PCDATA)>
+    <!ELEMENT price (#PCDATA)>
+]>
+<books>
+    <book>
+	  <title>JavaProgramming</title>
+	  <author>홍길동</author>
+	  <price>28000</price>
+	</book>
+	<book>
+	  <title>OracleSQL</title>
+	  <author>길라임</author>
+	  <price>32000</price>
+	</book>
+	<book>
+	  <title>JavaScript</title>
+	  <author>김주원</author>
+	  <price>29000</price>
+	</book>
+	<book>
+	  <title>XMLBible</title>
+	  <author>홍길동</author>
+	  <price>33000</price>
+	</book>
+	<!-- 나주석 -->
+</books>
+<!-- 너주석 -->
+
+
+
+
+
+
+
+
+
+

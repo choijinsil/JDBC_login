@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<books a='10' b='20' c='30'>
+	<book >
+		<title>JavaPrograming</title>
+		<author>홍길동</author>
+		<price>28000</price>
+	</book>
+	<book>
+		<title>OracleSQL</title>
+		<author>길라임</author>
+		<price>32000</price>
+	</book>
+	<book>
+		<title>JAVASCRIPT</title>
+		<author>김주원</author>
+		<price>29000</price>
+	</book>
+	<book>
+		<title>XMLBible</title>
+		<author>홍길동</author>
+		<price>33000</price>
+	</book>
+	<!-- 나주석 -->
+</books>
+
+<!-- 너주석 -->
