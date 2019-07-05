@@ -156,6 +156,34 @@ public class ServiceForm extends JFrame {
 		return map;
 
 	}
+	
+	public Map<String, String> optionMsg2() {
+
+		Map<String, String> map = new HashMap<String, String>();
+		// options는 배열
+		int t = JOptionPane.showOptionDialog(this, panel_option, "Search", JOptionPane.OK_CANCEL_OPTION,
+				JOptionPane.PLAIN_MESSAGE, null, null, null);
+		// 확인, 취소 , x : 0, 1, -1
+
+		String key = "%"+tf_search.getText()+"%"; // 입력한 값
+		String title = "";// 라디오 선택한 값
+
+		// 라디오 버튼이 선택 되었다면
+		if (radio_addr.isSelected()) {
+			// 텍스트를 가져와라.
+			map.put("addr", key);
+		} else if (radio_id.isSelected()) {
+			map.put("id", key);
+		} else if (radio_name.isSelected()) {
+			map.put("name", key);
+		}
+
+		map.put("title", title); // 선택한 제목
+		map.put("key", key); // 검색내용
+
+		return map;
+
+	}
 
 	// ArrayList안에 저장된 MembershipVO정보를 JTable에 출력하는 기능.
 	// {"ID","이름","나이","성별","전화번호","주소","직업"};

@@ -39,8 +39,21 @@
 		where name like #name#
 	</select>
 
-	<select id="findSearch" parameterClass="java.util.Map" resultClass="">
-		
+	<select id="findSearch" parameterClass="java.util.Map"
+		resultClass="member">
+
+		select id,name,ssn1,ssn2,phone,addr,job from membership
+
+		<isNotNull property="id">
+			where id like #id#
+		</isNotNull>
+		<isNotNull property="name">
+			where name like #name#
+		</isNotNull>
+		<isNotNull property="addr">
+			where name like #addr#
+		</isNotNull>
+
 	</select>
 
 	<select id="findById" parameterClass="String" resultClass="">
@@ -48,13 +61,20 @@
 		id=#id#
 	</select>
 
-	<select id="findLogin" parameterClass="java.util.Map" resultClass="int">
-		select count(*) from membership where id=#id# and pass=#pass#
+	<select id="findLogin" parameterClass="java.util.Map"
+		resultClass="int">
+		select count(*) from membership where id=#id# and
+		pass=#pass#
+	</select>
+
+	<select id="findLogin2" parameterClass="String"
+		resultClass="String">
+		select pass from membership where id=#id#
 	</select>
 	
-	<select id="findLogin2" parameterClass="String" resultClass="String">
-		select pass from membership where id=#id#
-		</select>
+	<select id="findAdmin" parameterClass="String" resultClass="String">
+		select id from membership where id = #id# and pass=#pass#
+	</select>
 </sqlMap>
 
 

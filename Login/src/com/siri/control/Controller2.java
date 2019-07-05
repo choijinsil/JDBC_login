@@ -11,7 +11,6 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.SQLException;
 
-import com.siri.model.dao.MembershipDAO;
 import com.siri.model.dao.MembershipDAO2;
 import com.siri.model.dao.MembershipDAO2;
 import com.siri.model.vo.MembershipVO;
@@ -20,7 +19,7 @@ import com.siri.view.LoginForm;
 import com.siri.view.ServiceForm;
 import com.siri.view.UpdateForm;
 
-public class Controller implements ActionListener {
+public class Controller2 implements ActionListener {
 	// 시작뷰는 로그인폼 set visible
 	JoinForm joinForm;
 	LoginForm loginForm;
@@ -29,7 +28,7 @@ public class Controller implements ActionListener {
 	String ck_str;
 	boolean possDml;
 
-	public Controller() {
+	public Controller2() {
 		joinForm = new JoinForm();
 		loginForm = new LoginForm();
 		loginForm.tf_pass.addActionListener(this);
@@ -89,13 +88,17 @@ public class Controller implements ActionListener {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				int num = new MembershipDAO().findExistId(joinForm.tf_id.getText());
-				System.out.println("keyReleased>>>" + joinForm.tf_id.getText());
-				if (num == 1) {
-					// 텍스트 바꾸는 건 forground
-					joinForm.bt_checkid.setBackground(Color.RED);
-				} else {
-					joinForm.bt_checkid.setBackground(Color.GREEN);
+				try {
+					int num = new MembershipDAO2().findExistId(joinForm.tf_id.getText());
+					System.out.println("keyReleased>>>" + joinForm.tf_id.getText());
+					if (num == 1) {
+						// 텍스트 바꾸는 건 forground
+						joinForm.bt_checkid.setBackground(Color.RED);
+					} else {
+						joinForm.bt_checkid.setBackground(Color.GREEN);
+					}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
 				}
 			}
 		});
@@ -144,7 +147,7 @@ public class Controller implements ActionListener {
 				MembershipDAO2 dao = new MembershipDAO2();
 				boolean isOk = dao.findLogin(loginForm.tf_id.getText(), new String(loginForm.tf_pass.getPassword()));
 
-				String isAdmin = new MembershipDAO().findAdmin(loginForm.tf_id.getText(),
+				String isAdmin = new MembershipDAO2().findAdmin(loginForm.tf_id.getText(),
 						new String(loginForm.tf_pass.getPassword()));
 
 				// 로그인시 admin이면 true, 사용자면 false
@@ -236,7 +239,7 @@ public class Controller implements ActionListener {
 					}
 				} else {
 					// 관리자가 아닐때
-					String isAdmin = new MembershipDAO().findAdmin(loginForm.tf_id.getText(),
+					String isAdmin = new MembershipDAO2().findAdmin(loginForm.tf_id.getText(),
 							new String(loginForm.tf_pass.getPassword()));
 					if (id.equals(isAdmin)) {
 						serviceForm.setVisible(false);
@@ -286,7 +289,7 @@ public class Controller implements ActionListener {
 					}
 					// 관리자 false라면
 				} else {
-					String isAdmin = new MembershipDAO().findAdmin(loginForm.tf_id.getText(),
+					String isAdmin = new MembershipDAO2().findAdmin(loginForm.tf_id.getText(),
 							new String(loginForm.tf_pass.getPassword()));
 
 					if (id.equals(isAdmin)) {
@@ -302,7 +305,7 @@ public class Controller implements ActionListener {
 				// 이름 검색하기
 				MembershipDAO2 dao = new MembershipDAO2();
 				// String name = serviceForm.showInput("검색할 이름을 입력해주세요.");
-				serviceForm.displayTable(dao.findSearch(serviceForm.optionMsg()));
+				serviceForm.displayTable(dao.findSearch(serviceForm.optionMsg2()));
 				
 				// serviceForm.displayTable(dao.findByName(name));
 
@@ -312,7 +315,7 @@ public class Controller implements ActionListener {
 
 			} else if (ob == serviceForm.item_confirm) {
 //			if ("인증".equals(serviceForm.item_confirm.getText())) {
-				String isAdmin = new MembershipDAO().findAdmin(loginForm.tf_id.getText(),
+				String isAdmin = new MembershipDAO2().findAdmin(loginForm.tf_id.getText(),
 						new String(loginForm.tf_pass.getPassword()));
 
 				if ("admin".equals(isAdmin)) {
@@ -344,7 +347,7 @@ public class Controller implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		new Controller();
+		new Controller2();
 	}
 
 }
